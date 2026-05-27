@@ -24,7 +24,6 @@ const JF_VALUE_MAP = {
     'brisbane': 'Brisbane', 'gold-coast': 'Gold Coast', 'bundaberg': 'Bundaberg',
     'cairns': 'Cairns', 'gympie': 'Gympie', 'hervey-bay': 'Hervey Bay',
     'rockhampton': 'Rockhampton', 'toowoomba': 'Toowoomba', 'townsville': 'Townsville',
-    'other': 'Other QLD',
   },
   bill: {
     'under-200': 'Under $200', '200-400': '$200–$400',
@@ -106,6 +105,7 @@ function validate(data) {
   if (!data.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email.trim())) errors.email = 'Enter a valid email address.';
   if (!data.postcode || !/^\d{4}$/.test(data.postcode.trim())) errors.postcode = '4-digit Australian postcode.';
   if (!data.serviceArea) errors.serviceArea = 'Pick your area.';
+  else if (!(data.serviceArea in JF_VALUE_MAP.serviceArea)) errors.serviceArea = 'We only service the listed QLD areas.';
   if (!data.bill) errors.bill = 'Pick a bill range.';
   if (!data.currentSetup) errors.currentSetup = 'Pick one.';
   return errors;
